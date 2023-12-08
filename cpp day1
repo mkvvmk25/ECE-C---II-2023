@@ -1,0 +1,95 @@
+#include<iostream> 
+using namespace std;
+
+
+class Node
+{
+    public:
+        int value;
+        Node  *next_address = NULL;
+};
+
+class SingleLL 
+{
+    public:
+        Node *head = NULL; 
+        Node *tail = NULL; 
+        int length = 0; 
+
+        bool isempty()
+        {
+            if(this->head == NULL)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+        }
+
+        void ins_beg(int val) 
+        {
+            Node *newnode  = new Node();
+            this->length += 1;
+            newnode->value = val; 
+            if( this->isempty() == true)
+            {
+                this->head = newnode;
+                this->tail = newnode;
+            }
+            else 
+            {
+                newnode->next_address = this->head; 
+                this->head = newnode;
+            }
+        }
+        
+        void push(int val) 
+        {
+            Node *newnode  = new Node();
+            this->length += 1;
+            newnode->value = val; 
+            if( this->isempty() == true)
+            {
+                this->head = newnode;
+                this->tail = newnode;
+            }
+            else 
+            {
+                this->tail->next_address = newnode;
+                this->tail = newnode; 
+            }
+
+        }
+
+        void ins_between()
+        {
+
+        }
+
+        void printLL()
+        {
+            Node *temp;
+            temp = this->head; 
+            while ( temp != NULL )
+            {
+
+                cout << temp->value << ", ";   ///        1
+                temp = temp->next_address;    // 
+            }
+
+        }
+
+
+};
+
+
+
+
+
+
+int main()
+{
+    
+}
