@@ -1,0 +1,69 @@
+// You are using GCC
+#include<bits/stdc++.h>
+using namespace std;
+struct Node
+{ int data;
+Node* prev;
+Node* next;
+};
+
+void addNode(Node** head,int data)//function creates an empty node and insert at end
+{ Node* newNode= new Node;//creates memory for the node
+ newNode-> data=data;
+ newNode->prev=NULL;
+ newNode->next=NULL;
+ if(*head==NULL)
+ {*head=newNode;
+ }
+ else
+ {Node* current=*head;
+ while(current->next!=NULL)
+ {current=current->next;
+ }
+ current->next=newNode;
+ newNode->prev=current;
+ }
+}
+
+void deleteNode(Node** head)  // to remove the last node in the list
+{ if(*head==NULL)
+   { return;
+   }
+   if((*head)->next==NULL)
+   { delete *head;
+     *head=NULL;
+     return ;
+   }
+    Node* current=*head;
+    while(current->next!=NULL)
+    { current= current->next;
+    }
+    current->prev->next=NULL;
+    delete current;
+}
+
+void displayList(Node* head)  // to display elements
+{ Node* current=head;
+  while(current!=NULL)
+  { cout<< current->data <<" ";
+    current=current->next;
+  }
+}
+
+
+int main()
+{Node *head=NULL;
+int n,data,deletecount;
+cin>>n;
+for(int i=0;i<n;i++)  // get input elements for list
+{cin>>data;
+ addNode(&head,data);
+}
+cin>>deletecount;
+displayList(head);
+for(int i=0;i<deletecount;i++) //delete each node from last till the deletecount
+{deleteNode(&head);
+}
+displayList(head);
+    return 0;
+}
