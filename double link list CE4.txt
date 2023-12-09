@@ -1,0 +1,52 @@
+// You are using GCC
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void addNode(Node** head, int data) {
+    Node* newNode = new Node;
+    newNode->data = data;
+    newNode->next = *head;
+    if (*head == NULL) {
+        newNode->next = newNode;
+        *head = newNode;
+        return;
+    }
+    Node* current = *head;
+    while (current->next != *head) {
+        current = current->next;
+    }
+    current->next = newNode;
+    *head = newNode;
+}
+
+void displayList(Node* head) {
+    if (head == NULL) {
+        return;
+    }
+    Node* current = head;
+    do {
+        cout << current->data << " ";
+        current = current->next;
+    } while (current != head);
+    cout << endl;
+}
+
+int main() {
+    Node* head = NULL;
+    int n, data;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        cin >> data;
+        addNode(&head, data);
+    }
+    displayList(head);
+    cin >> data;
+    addNode(&head, data);
+    displayList(head);
+    return 0;
+}
