@@ -1,0 +1,51 @@
+// You are using GCC
+#include<bits/stdc++.h>
+using namespace std;
+struct Node
+{ int data;
+Node* prev;
+Node* next;
+};
+
+Node* createNewNode(int data)
+{Node* newNode= new Node;//creates memory for the node
+ newNode-> data=data;
+ newNode->prev=NULL;
+ newNode->next=NULL;
+ return newNode;
+}
+Node*  insertAtEnd(Node* head,int data)
+  {Node* newNode=createNewNode(data);
+   if(head ==NULL)
+   {head=newNode;}
+   else
+   {Node* current=head;
+   while(current->next!=NULL)
+   {current=current->next;   //moves current pointer to last element
+   }
+   current->next=newNode; // links last node and new node
+   newNode->prev=current;
+   }
+    return head;  
+  }
+
+void displayList(Node* head)
+{ Node* current=head;
+  while(current!=NULL)
+  { cout<< current->data <<" ";
+    current=current->next;
+  }
+    
+}
+
+int main()
+{ Node* head=NULL;
+  int data,n;  
+  cin>>n;
+  for(int i=0;i<n;i++)
+  { cin>>data;
+    head=insertAtEnd(head,data);
+  }
+    displayList(head);
+return 0;    
+}

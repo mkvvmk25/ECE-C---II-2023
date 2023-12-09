@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct Node
+{ int data;
+Node* prev;
+Node* next;
+};
+
+Node* createNewNode(int data)
+{Node* newNode= new Node;//creates memory for the node
+ newNode-> data=data;
+ newNode->prev=NULL;
+ newNode->next=NULL;
+ return newNode;
+}
+Node*  insertAtBegin(Node* head,int data)
+  {Node* newNode=createNewNode(data);
+   if(head ==NULL)
+   {head=newNode;}
+   else
+   {head->prev=newNode;
+    newNode->next=head;
+    head=newNode;
+   }
+    return head;  
+  }
+
+void displayList(Node* head)
+{ Node* current=head;
+  while(current!=NULL)
+  { cout<< current->data <<" ";
+    current=current->next;
+  }
+    
+}
+
+int main()
+{ Node* head=NULL;
+  int data,n;  
+  cin>>n;
+  for(int i=0;i<n;i++)
+  { cin>>data;
+    head=insertAtBegin(head,data);
+  }
+    displayList(head);
+return 0;    
+}
