@@ -1,0 +1,79 @@
+#include <iostream>
+
+using namespace std;
+
+// Define the structure of the doubly linked list node
+struct Node {
+    int data;
+    Node* prev;
+    Node* next;
+};
+
+// Function to insert a new node at the beginning of the list
+void insertAtBeginning(Node** headRef, int newData) {
+    // Allocate memory for a new node
+    Node* newNode = new Node();
+
+    // Set the data and next and prev pointers for the new node
+    newNode->data = newData;
+    newNode->next = *headRef;
+    newNode->prev = NULL;
+
+    // Update the prev pointer of the head node (if it exists) to point to the new node
+    if (*headRef != NULL) {
+        (*headRef)->prev = newNode;
+    }
+
+    // Update the head pointer to point to the new node
+    *headRef = newNode;
+}
+
+// Function to print the doubly linked list forwards
+void printListForward(Node* head) {
+    Node* temp = head;
+    while (temp != NULL) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+// Function to print the doubly linked list backwards
+void printListBackward(Node* tail) {
+    Node* temp = tail;
+    while (temp != NULL) {
+        cout << temp->data << " ";
+        temp = temp->prev;
+    }
+    cout << endl;
+}
+
+int main() {
+    // Initialize an empty doubly linked list
+    Node* head = NULL;
+    Node* tail = NULL;
+
+    // Get the number of nodes to insert from the user
+    int numNodes;
+    // cout << "Enter the number of nodes to insert: ";
+    cin >> numNodes;
+
+    // Get the data for each node from the user and insert it at the beginning of the list
+    int newData;
+    for (int i = 0; i < numNodes; i++) {
+        // cout << "Enter data for node " << i+1 << ": ";
+        cin >> newData;
+        insertAtBeginning(&head, newData);
+        if (tail == NULL) {
+            tail = head;
+        }
+    }
+
+    // Print the doubly linked list forwards and backwards
+    cout << "Doubly linked list forwards: ";
+    printListForward(head);
+    cout << "Doubly linked list backwards: ";
+    printListBackward(tail);
+
+    return 0;
+}
