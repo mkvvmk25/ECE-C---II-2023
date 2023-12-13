@@ -1,7 +1,5 @@
 #include<iostream>
 using namespace std;
-#include<vector> 
-
 struct stackARR 
 {
     char *stack; 
@@ -78,11 +76,7 @@ struct stackARR
 
     int ch_rank(char ch)
     {
-        if(ch == '^')
-        {
-            return 4;
-        }
-        else if(ch == '/' || ch == '*' || ch == '%')
+        if(ch == '/' || ch == '*' || ch == '%')
         {
             return 3;
         }
@@ -147,33 +141,51 @@ struct stackARR
 
         return post;
     }
-};
 
-int main()
-{
-    string n;
-    getline(cin, n); 
-    string g = "";
-    string s[100];
-    int ind = 0;
-    for(int i = 0; i < n.length(); i++)
+
+    int bal_para(string exp)
     {
-        if(n[i] != ' ')
+        int t = exp.length(); 
+        int c = 0;
+        if(t%2 == 1)
         {
-            g = g + n[i]; // "10"
+            return -1;
         }
         else 
         {
-            s[ind] = g;
-            ind++;
-            g = "";
+            for(int i = 0; i < t; i++)
+            {
+                if(exp[i] == '{' )
+                {
+                    this->push(exp[i]);
+                }
+                else 
+                {
+                    // sc1 pop + notempt 
+                    if(this->isempty() == false)
+                    {
+                        this->pop();
+                    }
+                    else{
+                        c++;
+                    }
+                }
+            } 
+            int pes = (this->top + 1);
+            int f = (pes + c)/2;
+            return f;
         }
-    }
-    s[ind] = g;
 
-    for(int i = 0; i < ind+1; i++)
-    {
-        cout << s[i] <<"-->" << stoi(s[0])+1;
-    }
 
+    }
+};
+
+
+int main()
+{
+    string k = "}}{}}}}}";
+    //          12345678
+    struct stackARR *n = new stackARR();
+    n->stacksize(100);
+    n->bal_para(k);
 }
